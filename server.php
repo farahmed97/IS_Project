@@ -60,7 +60,7 @@
 		    	header('location: index.php'); // redirect to homepage
 			}else{
 				array_push($errors, "wrong username/password combination");
-				header('location: index.php');
+				header('location: login.php');
 			}
 		}
 	}
