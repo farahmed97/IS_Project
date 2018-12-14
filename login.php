@@ -19,10 +19,10 @@
         </div>
         <div class = "input-group">
             <label>Password</label>
-            <input type ="password" name="password_1">
+            <input type ="password" name="password">
         </div>
         <div class = "input-group">
-            <button type = "submit" name="register" class="btn">Register</button>
+            <button type = "submit" name="login" class="btn">login</button>
         </div>
         <p>
             Not a member? <a href="register.php">Sign up </a>

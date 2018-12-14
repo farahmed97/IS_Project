@@ -47,7 +47,7 @@
 		        array_push($errors, "Username is required");
 		    }
 		    if(empty($password)){
-		    array_push($errors, "Password is required");
+		    	array_push($errors, "Password is required");
 		    }
 		    if(count($errors) == 0){
 			    $password = md5($password); // encrypt password before comparing with that from database
@@ -60,7 +60,7 @@
 		    	header('location: index.php'); // redirect to homepage
 			}else{
 				array_push($errors, "wrong username/password combination");
-				header('location: login.php');
+				header('location: index.php');
 			}
 		}
 	}
@@ -68,6 +68,6 @@
 	if(isset($_GET['logout'])){
 		session_destroy();
 		unset($_SESSION['username']);
-		header('location: login.php');
+		header('location: index.php');
 	}
 	?>
