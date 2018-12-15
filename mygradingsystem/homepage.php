@@ -42,6 +42,7 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
+              <li class=""><a href="/mygradingsystem/register.php">Register</a></li>
               <li class=""><a href="/mygradingsystem/login.php">Login</a></li>
               <li class=""><a href="/mygradingsystem/viewgrades.php">View Grades</a></li>
           </ul>
