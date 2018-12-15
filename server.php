@@ -2,6 +2,7 @@
 	$username = "";
 	$email = "";
 	$errors = array();
+    $token;
 
 	// connect to the database
 	$db = mysqli_connect('localhost', 'root', '','registeration');
@@ -31,7 +32,7 @@
 		if (count($errors) == 0){
 			$password = md5($password_1); // encrypt password before storing in database (security)
             $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-            mysqli_query($db, $sql);
+			mysqli_query($db, $sql);
 			$_SESSION['username'] = $username;
 			$_SESSION['success'] = "You are now logged in";
 			header('location: index.php'); //redirect to home page
@@ -41,13 +42,14 @@
     if (isset($_POST['login'])){
 			$username = ($_POST['username']);
 			$password = ($_POST['password']);
+			$token = ($_POST['token']);
 
 	// ensure that form fields are filled properly
 		    if(empty($username)){
 		        array_push($errors, "Username is required");
 		    }
 		    if(empty($password)){
-		    	array_push($errors, "Password is required");
+		      	array_push($errors, "Password is required");
 		    }
 		    if(count($errors) == 0){
 			    $password = md5($password); // encrypt password before comparing with that from database
@@ -55,9 +57,10 @@
 			    $result = mysqli_query($db, $query);
 			if (mysqli_num_rows($result) == 1){
 				// log user in
-				$SESSION['username'] = $username;
-				$SESSION['success'] = "You are now logged in";
+				$_SESSION['username'] = $username;
+				$_SESSION['success'] = "You are now logged in";
 		    	header('location: index.php'); // redirect to homepage
+				//$ins_token = "INSERT INTO tokens (username, token) VALUES ('$username', '$token')";
 			}else{
 				array_push($errors, "wrong username/password combination");
 				header('location: login.php');
@@ -69,5 +72,18 @@
 		session_destroy();
 		unset($_SESSION['username']);
 		header('location: index.php');
+	}
+	
+	//token
+	public function valid_token()
+	{
+		return ($this->token == $_SESSION['token']) ? 1 : 0;
+	}
+	
+	public function verify_post()
+	{
+		if($this->valid_token()){
+			$this->$result = 1;
+		}
 	}
 	?>
